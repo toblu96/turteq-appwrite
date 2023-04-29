@@ -1,20 +1,30 @@
+import { AppwriteException } from 'appwrite'
+
 export const useAuthClient = () => {
   const { $appwrite } = useNuxtApp()
   const route = useRoute()
 
   const loginWithEmail = async (email: string, password: string) => {
-    // TODO: Error handling
-    const session = await $appwrite.account.createEmailSession(email, password)
-    if (session.$id) {
-      // check if there was an active route before login
-      route.query.redirect ? navigateTo(route.query.redirect as string) : navigateTo('/')
+    try {
+      const session = await $appwrite.account.createEmailSession(email, password)
+      if (session.$id) {
+        // check if there was an active route before login
+        route.query.redirect ? await navigateTo(route.query.redirect as string) : await navigateTo('/')
+      }
+    } catch (error) {
+      const err = error as AppwriteException
+      return err
     }
   }
 
   const logout = async () => {
-    // TODO: Error handling
-    await $appwrite.account.deleteSession('current')
-    navigateTo('/login')
+    try {
+      await $appwrite.account.deleteSession('current')
+      navigateTo('/login')
+    } catch (error) {
+      const err = error as AppwriteException
+      return err
+    }
   }
 
   return { loginWithEmail, logout }
