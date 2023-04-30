@@ -1,12 +1,79 @@
 <template>
   <div>
-    <h1>Login page</h1>
-    <button @click="loginWithEmail('admin@admin.com', 'admin1234')">
-      login
-    </button>
+    <div class="flex bg-slate-900 h-screen min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-16 w-auto " src="/img/logo.svg" alt="Company Logo">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+          Sign in to your account
+        </h2>
+      </div>
+
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <n-alert v-if="errorMessage" title="Login Error" type="warning" class="my-8">
+          {{ errorMessage || 'No idea what just happened. Sorry, try again and hope the best 😐' }}
+        </n-alert>
+        <form class="space-y-6" method="POST" @submit.prevent="login">
+          <div>
+            <label for="email" class="block text-sm font-medium leading-6 text-white">Email address</label>
+            <div class="mt-2">
+              <input
+                id="email"
+                v-model="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required="true"
+                class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+              >
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="block text-sm font-medium leading-6 text-white">Password</label>
+              <div class="text-sm">
+                <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+              </div>
+            </div>
+            <div class="mt-2">
+              <input
+                id="password"
+                v-model="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required="true"
+                class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+              >
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+              Sign in
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-10 text-center text-sm text-slate-400">
+          Not a member?
+          <a href="#" class="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">Start a 14 day free trial</a>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
-
 <script setup lang="ts">
 const { loginWithEmail } = useAuthClient()
+
+const email = ref('')
+const password = ref('')
+const errorMessage = ref('')
+
+const login = async () => {
+  const err = await loginWithEmail(email.value, password.value)
+  if (err) {
+    errorMessage.value = err.message
+  }
+}
 </script>
