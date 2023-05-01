@@ -7,6 +7,8 @@
 </template>
 
 <script setup lang="ts">
+import { NTag } from 'naive-ui'
+import { slate } from 'tailwindcss/colors'
 const TTButtonLinkProjectDevices = resolveComponent('TTButtonLinkProjectDevices')
 const TTButtonLinkProjectContract = resolveComponent('TTButtonLinkProjectContract')
 const TTAvatarGroupProjectMembers = resolveComponent('TTAvatarGroupProjectMembers')
@@ -29,7 +31,12 @@ const columns = [
   },
   {
     title: 'Status',
-    key: 'status'
+    key: 'status',
+    render (row: any) {
+      return h(NTag, {
+        color: { color: slate[900], textColor: slate[500], borderColor: slate[700] }
+      }, () => row.status)
+    }
   },
   {
     title: 'Devices',
