@@ -27,6 +27,9 @@ const darkThemeOverrides: GlobalThemeOverrides = {
     borderColor: slate[700],
     textColor2: slate[300] // button text
   },
+  Avatar: {
+    color: slate[800]
+  },
   Select: {
     peers: {
       InternalSelectMenu: {
