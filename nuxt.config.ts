@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@huntersofbook/naive-ui-nuxt',
     'nuxt-appwrite'
   ],
+  ssr: false,
   typescript: {
     shim: false
   },
