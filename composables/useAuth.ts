@@ -27,6 +27,5 @@ export const useAuth = () => {
       session.value = undefined
     }
   })
-
   return session
 }

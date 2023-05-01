@@ -64,6 +64,10 @@
   </div>
 </template>
 <script setup lang="ts">
+definePageMeta({
+  layout: false
+})
+
 const { loginWithEmail } = useAuthClient()
 
 const email = ref('')
