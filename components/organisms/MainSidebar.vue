@@ -2,6 +2,7 @@
   <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-950 px-6 ring-1 ring-slate-700">
     <div class="flex h-16 shrink-0 items-center">
       <img class="h-8 w-auto" src="/img/logo.svg" alt="Company Logo">
+      <span class="ml-4 mt-1 text-2xl text-slate-300 font-mono">TurTeq</span>
     </div>
     <TTSelectTeamSelection />
 
