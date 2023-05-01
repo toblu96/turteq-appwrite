@@ -1,16 +1,22 @@
 <template>
-  <NSpace vertical>
-    <NSelect
-      v-model:value="data"
-      :options="options"
-      :render-label="renderLabel"
-      :render-tag="renderSingleSelectTag"
-      filterable
-      :loading="false"
-      placeholder="Select team"
-      size="large"
-    />
-  </NSpace>
+  <NSelect
+    v-model:value="selectedTeam"
+    :options="teamMemberships.teams.map(({$id, name, prefs}) => {
+      return {
+        value: $id,
+        name,
+        prefs
+      }
+    })"
+    :render-label="renderLabel"
+    :render-tag="renderSingleSelectTag"
+    filterable
+    :loading="false"
+    placeholder="Select team"
+    size="large"
+    @update-value="teamSelectionChanged"
+  />
+  {{ selectedTeam }}
 </template>
 
 <script setup lang="ts">
@@ -21,23 +27,34 @@ import {
   SelectRenderLabel
 } from 'naive-ui'
 
-const options = ref([
-  {
-    label: 'RDIA Team',
-    value: 'rdia-team'
-  },
-  {
-    label: 'MDSE Team',
-    value: 'mdse-team'
-  },
-  {
-    label: 'Labor',
-    value: 'labor'
-  }
-])
-const data = ref(options.value[0].value)
+const selectedTeam = ref('')
 
-const renderSingleSelectTag: SelectRenderTag = ({ option }) => {
+const { teams, account } = useAppwrite()
+const teamMemberships = await teams.list()
+const userPrefs = await account.getPrefs()
+
+// check if the last selected team was stored
+if (userPrefs.activeTeam) {
+  selectedTeam.value = userPrefs.activeTeam
+} else {
+  selectedTeam.value = teamMemberships.teams[0].$id
+  // store current team to users prefs
+  await account.updatePrefs({
+    activeTeam: teamMemberships.teams[0].$id
+  })
+}
+
+const teamSelectionChanged = async (teamId: string) => {
+  try {
+    await account.updatePrefs({
+      activeTeam: teamId
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const renderSingleSelectTag: SelectRenderTag = ({ option: team }) => {
   return h(
     'div',
     {
@@ -55,7 +72,7 @@ const renderSingleSelectTag: SelectRenderTag = ({ option }) => {
           marginRight: '12px'
         }
       }),
-            option.label as string
+            team.name as string
     ]
   )
 }
@@ -83,12 +100,12 @@ const renderLabel: SelectRenderLabel = (option) => {
           }
         },
         [
-          h('div', null, [option.label as string]),
+          h('div', null, [option.name as string]),
           h(
             NText,
             { depth: 3, tag: 'div' },
             {
-              default: () => 'description'
+              default: () => option.prefs.desc || '-'
             }
           )
         ]
