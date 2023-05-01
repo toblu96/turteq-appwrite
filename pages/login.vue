@@ -9,9 +9,9 @@
       </div>
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <n-alert v-if="errorMessage" title="Login Error" type="warning" class="my-8">
+        <NAlert v-if="errorMessage" title="Login Error" type="warning" class="my-8">
           {{ errorMessage || 'No idea what just happened. Sorry, try again and hope the best 😐' }}
-        </n-alert>
+        </NAlert>
         <form class="space-y-6" method="POST" @submit.prevent="login">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-white">Email address</label>

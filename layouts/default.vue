@@ -38,50 +38,12 @@
                 <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
                   <button type="button" class="-m-2.5 p-2.5" @click="sidebarOpen = false">
                     <span class="sr-only">Close sidebar</span>
-                    <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                    <NIcon :component="Dismiss24Regular" size="24" class="text-white" />
                   </button>
                 </div>
               </TransitionChild>
               <!-- Sidebar component, swap this element with another sidebar if you like -->
-              <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10">
-                <div class="flex h-16 shrink-0 items-center">
-                  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-                </div>
-                <nav class="flex flex-1 flex-col">
-                  <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                    <li>
-                      <ul role="list" class="-mx-2 space-y-1">
-                        <li v-for="item in navigation" :key="item.name">
-                          <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                            <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                            {{ item.name }}
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <div class="text-xs font-semibold leading-6 text-gray-400">
-                        Your teams
-                      </div>
-                      <ul role="list" class="-mx-2 mt-2 space-y-1">
-                        <li v-for="team in teams" :key="team.name">
-                          <a :href="team.href" :class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
-                            <span class="truncate">{{ team.name }}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="-mx-6 mt-auto">
-                      <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
-                        <img class="h-8 w-8 rounded-full bg-gray-800" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                        <span class="sr-only">Your profile</span>
-                        <span aria-hidden="true">Tom Cook</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+              <OrganismsMainSidebar />
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -91,87 +53,11 @@
     <!-- Static sidebar for desktop -->
     <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-950 px-6 ring-1 ring-white/5">
-        <div class="flex h-16 shrink-0 items-center">
-          <img class="h-8 w-auto" src="/img/logo.svg" alt="Company Logo">
-        </div>
-        <TtSelectTeamSelection />
-
-        <NInput placeholder="Search...">
-          <template #prefix>
-            <NIcon :component="Search24Regular" />
-          </template>
-          <template #suffix>
-            <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
-              <kbd class="inline-flex items-center rounded border border-slate-400 px-1 font-sans text-sm text-slate-400">⌘K</kbd>
-            </div>
-          </template>
-        </NInput>
-
-        <nav class="flex flex-1 flex-col">
-          <ul role="list" class="flex flex-1 flex-col gap-y-7">
-            <li>
-              <ul role="list">
-                <li v-for="item in navigation" :key="item.name">
-                  <NuxtLink :to="item.href" :class="[item.current ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800', 'group flex items-center gap-x-3 rounded-md px-2 py-1 text-sm leading-6 font-semibold']">
-                    <NIcon :component="item.icon" size="20" class="shrink-0" />
-                    {{ item.name }}
-                  </NuxtLink>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <div class="text-xs font-semibold leading-6 text-slate-400">
-                Your projects
-              </div>
-              <ul role="list" class="mt-2">
-                <li v-for="team in teams" :key="team.name">
-                  <a :href="team.href" :class="[team.current ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800', 'group flex items-center gap-x-3 rounded-md px-2 py-1 text-sm leading-6 font-semibold']">
-                    <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-700 bg-slate-800 text-[0.625rem] font-medium text-slate-400 group-hover:text-white">{{ team.initial }}</span>
-                    <span class="truncate">{{ team.name }}</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="-mx-6 mt-auto">
-              <div class="p-2 pr-6 flex items-center justify-between">
-                <TtDropdownUserProfile />
-                <n-badge dot :show="true" :offset="[0, 3]">
-                  <NuxtLink class="flex items-center justify-center w-8 h-8 bg-slate-800 text-white rounded border border-transparent hover:border-lime-600">
-                    <NIcon size="20">
-                      <Alert24Regular />
-                    </NIcon>
-                  </NuxtLink>
-                </n-badge>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <OrganismsMainSidebar />
     </div>
 
     <div class="xl:pl-72">
-      <!-- Sticky search header -->
-      <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
-        <button type="button" class="-m-2.5 p-2.5 text-white xl:hidden" @click="sidebarOpen = true">
-          <span class="sr-only">Open sidebar</span>
-          <Bars3Icon class="h-5 w-5" aria-hidden="true" />
-        </button>
-
-        <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <form class="flex flex-1" action="#" method="GET">
-            <label for="search-field" class="sr-only">Search</label>
-            <div class="relative w-full">
-              <MagnifyingGlassIcon class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500" aria-hidden="true" />
-              <input id="search-field" class="block h-full w-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm" placeholder="Search..." type="search" name="search">
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <main>
-        <slot />
-      </main>
+      <slot />
     </div>
   </div>
 </template>
@@ -183,38 +69,10 @@ import {
   TransitionChild,
   TransitionRoot
 } from '@headlessui/vue'
-import {
-  ChartBarSquareIcon,
-  Cog6ToothIcon,
-  FolderIcon,
-  GlobeAltIcon,
-  ServerIcon,
-  SignalIcon,
-  XMarkIcon
-} from '@heroicons/vue/24/outline'
-import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import Alert24Regular from '@vicons/fluent/Alert24Regular'
-import Search24Regular from '@vicons/fluent/Search24Regular'
-import Folder24Regular from '@vicons/fluent/Folder24Regular'
-import Communication24Regular from '@vicons/fluent/Communication24Regular'
-import Receipt24Regular from '@vicons/fluent/Receipt24Regular'
-import Diversity24Regular from '@vicons/fluent/Diversity24Regular'
-import Settings24Regular from '@vicons/fluent/Settings24Regular'
+import Dismiss24Regular from '@vicons/fluent/Dismiss24Regular'
 
-const navigation = [
-  { name: 'Projects', href: '#', icon: Folder24Regular, current: true },
-  { name: 'Activity', href: '#', icon: Communication24Regular, current: false },
-  { name: 'Billing', href: '#', icon: Receipt24Regular, current: false },
-  { name: 'Templates', href: '#', icon: Diversity24Regular, current: false },
-  { name: 'Settings', href: '#', icon: Settings24Regular, current: false }
-]
-const teams = [
-  { id: 1, name: 'Planetaria', href: '#', initial: 'P', current: false },
-  { id: 2, name: 'Protocol', href: '#', initial: 'P', current: false },
-  { id: 3, name: 'Tailwind Labs', href: '#', initial: 'T', current: false }
-]
-
-const sidebarOpen = ref(false)
+// const sidebarOpen = ref(false)
+const sidebarOpen = useSidebar()
 </script>
 
 <style>

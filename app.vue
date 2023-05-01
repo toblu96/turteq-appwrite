@@ -23,7 +23,9 @@ const lightThemeOverrides: GlobalThemeOverrides = {
 const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: lime[500],
-    primaryColorHover: lime[600]
+    primaryColorHover: lime[600],
+    borderColor: slate[700],
+    textColor2: slate[300] // button text
   },
   Select: {
     peers: {
