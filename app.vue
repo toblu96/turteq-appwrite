@@ -10,6 +10,7 @@
 </template>
 <script setup lang="ts">
 import { GlobalThemeOverrides, darkTheme } from 'naive-ui'
+// eslint-disable-next-line import/named
 import { slate, lime } from 'tailwindcss/colors'
 
 // TODO: Add lightTheme support

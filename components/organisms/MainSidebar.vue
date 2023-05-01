@@ -5,7 +5,7 @@
     </div>
     <TTSelectTeamSelection />
 
-    <NInput placeholder="Search...">
+    <NInput placeholder="Search..." :theme-overrides="inputThemeOverrides">
       <template #prefix>
         <NIcon :component="Search24Regular" />
       </template>
@@ -66,6 +66,18 @@ import Receipt24Regular from '@vicons/fluent/Receipt24Regular'
 import Diversity24Regular from '@vicons/fluent/Diversity24Regular'
 import Settings24Regular from '@vicons/fluent/Settings24Regular'
 
+import { InputProps } from 'naive-ui'
+// eslint-disable-next-line import/named
+import { slate } from 'tailwindcss/colors'
+
+type InputThemeOverrides = NonNullable<InputProps['themeOverrides']>
+const inputThemeOverrides: InputThemeOverrides = {
+  color: 'white',
+  colorFocus: 'white',
+  iconColor: slate[500],
+  textColor: slate[500],
+  placeholderColor: slate[400]
+}
 const route = useRoute()
 
 const navigation = [

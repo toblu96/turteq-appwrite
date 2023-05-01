@@ -8,6 +8,7 @@
 
 <script setup lang="ts">
 import { NTag } from 'naive-ui'
+// eslint-disable-next-line import/named
 import { slate } from 'tailwindcss/colors'
 const TTButtonLinkProjectDevices = resolveComponent('TTButtonLinkProjectDevices')
 const TTButtonLinkProjectContract = resolveComponent('TTButtonLinkProjectContract')
