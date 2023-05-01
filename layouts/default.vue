@@ -121,13 +121,13 @@
               </ul>
             </li>
             <li>
-              <div class="text-xs font-semibold leading-6 text-gray-400">
-                Your teams
+              <div class="text-xs font-semibold leading-6 text-slate-400">
+                Your projects
               </div>
-              <ul role="list" class="-mx-2 mt-2 space-y-1">
+              <ul role="list" class="mt-2">
                 <li v-for="team in teams" :key="team.name">
-                  <a :href="team.href" :class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
+                  <a :href="team.href" :class="[team.current ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800', 'group flex items-center gap-x-3 rounded-md px-2 py-1 text-sm leading-6 font-semibold']">
+                    <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-700 bg-slate-800 text-[0.625rem] font-medium text-slate-400 group-hover:text-white">{{ team.initial }}</span>
                     <span class="truncate">{{ team.name }}</span>
                   </a>
                 </li>
