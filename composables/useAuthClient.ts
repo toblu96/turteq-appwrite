@@ -9,7 +9,7 @@ export const useAuthClient = () => {
       const session = await $appwrite.account.createEmailSession(email, password)
       if (session.$id) {
         // check if there was an active route before login
-        route.query.redirect ? await navigateTo(route.query.redirect as string) : await navigateTo('/')
+        route.query.redirect ? await navigateTo(route.query.redirect as string) : await navigateTo('/projects')
       }
     } catch (error) {
       const err = error as AppwriteException

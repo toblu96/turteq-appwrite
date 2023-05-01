@@ -21,7 +21,7 @@
         <li>
           <ul role="list">
             <li v-for="item in navigation" :key="item.name">
-              <NuxtLink :to="item.href" :class="[item.current ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800', 'group flex items-center gap-x-3 rounded-md px-2 py-1 text-sm leading-6 font-semibold']">
+              <NuxtLink :to="item.href" :class="[route.path === item.href ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800', 'group flex items-center gap-x-3 rounded-md px-2 py-1 text-sm leading-6 font-semibold']">
                 <NIcon :component="item.icon" size="20" class="shrink-0" />
                 {{ item.name }}
               </NuxtLink>
@@ -66,12 +66,14 @@ import Receipt24Regular from '@vicons/fluent/Receipt24Regular'
 import Diversity24Regular from '@vicons/fluent/Diversity24Regular'
 import Settings24Regular from '@vicons/fluent/Settings24Regular'
 
+const route = useRoute()
+
 const navigation = [
-  { name: 'Projects', href: '#', icon: Folder24Regular, current: true },
+  { name: 'Projects', href: '/projects', icon: Folder24Regular, current: true },
   { name: 'Activity', href: '#', icon: Communication24Regular, current: false },
   { name: 'Billing', href: '#', icon: Receipt24Regular, current: false },
-  { name: 'Templates', href: '#', icon: Diversity24Regular, current: false },
-  { name: 'Settings', href: '#', icon: Settings24Regular, current: false }
+  { name: 'Templates', href: '/templates', icon: Diversity24Regular, current: false },
+  { name: 'Settings', href: '/settings', icon: Settings24Regular, current: false }
 ]
 const teams = [
   { id: 1, name: 'Planetaria', href: '#', initial: 'P', current: false },

@@ -5,11 +5,14 @@ export default defineNuxtConfig({
     '@huntersofbook/naive-ui-nuxt',
     'nuxt-appwrite'
   ],
+  typescript: {
+    shim: false
+  },
+  routeRules: {
+    '/': { redirect: '/projects' }
+  },
   appwrite: {
     project: '644cf709ad88661c8222',
     endpoint: 'http://localhost/v1'
-  },
-  typescript: {
-    shim: false
   }
 })
