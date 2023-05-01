@@ -36,6 +36,18 @@ const darkThemeOverrides: GlobalThemeOverrides = {
   },
   Dropdown: {
     color: slate[700]
+  },
+  DataTable: {
+    paginationMargin: '1.5rem',
+    tdPaddingMedium: '0.75rem 1.5rem',
+    thPaddingMedium: '0.4rem 1.5rem',
+    tdColor: slate[950],
+    tdColorHover: slate[900],
+    thColor: slate[950],
+    borderColor: slate[800]
+  },
+  Tooltip: {
+    color: slate[700]
   }
 }
 

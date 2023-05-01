@@ -16,6 +16,10 @@
         </NButton>
       </div>
     </template>
+
+    <div>
+      <OrganismsTableProjectList />
+    </div>
   </PageWithHeader>
 </template>
 
