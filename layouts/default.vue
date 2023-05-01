@@ -181,7 +181,7 @@ import {
   XMarkIcon
 } from '@heroicons/vue/24/outline'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import { Alert24Regular } from '@vicons/fluent'
+import Alert24Regular from '@vicons/fluent/Alert24Regular'
 
 const navigation = [
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
