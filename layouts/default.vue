@@ -96,15 +96,27 @@
           <img class="h-8 w-auto" src="/img/logo.svg" alt="Company Logo">
         </div>
         <TtSelectTeamSelection />
+
+        <NInput placeholder="Search...">
+          <template #prefix>
+            <NIcon :component="Search24Regular" />
+          </template>
+          <template #suffix>
+            <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+              <kbd class="inline-flex items-center rounded border border-slate-400 px-1 font-sans text-sm text-slate-400">⌘K</kbd>
+            </div>
+          </template>
+        </NInput>
+
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
-              <ul role="list" class="-mx-2 space-y-1">
+              <ul role="list">
                 <li v-for="item in navigation" :key="item.name">
-                  <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                    <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                  <NuxtLink :to="item.href" :class="[item.current ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800', 'group flex items-center gap-x-3 rounded-md px-2 py-1 text-sm leading-6 font-semibold']">
+                    <NIcon :component="item.icon" size="20" class="shrink-0" />
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </li>
@@ -182,14 +194,19 @@ import {
 } from '@heroicons/vue/24/outline'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import Alert24Regular from '@vicons/fluent/Alert24Regular'
+import Search24Regular from '@vicons/fluent/Search24Regular'
+import Folder24Regular from '@vicons/fluent/Folder24Regular'
+import Communication24Regular from '@vicons/fluent/Communication24Regular'
+import Receipt24Regular from '@vicons/fluent/Receipt24Regular'
+import Diversity24Regular from '@vicons/fluent/Diversity24Regular'
+import Settings24Regular from '@vicons/fluent/Settings24Regular'
 
 const navigation = [
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Deployments', href: '#', icon: ServerIcon, current: true },
-  { name: 'Activity', href: '#', icon: SignalIcon, current: false },
-  { name: 'Domains', href: '#', icon: GlobeAltIcon, current: false },
-  { name: 'Usages', href: '#', icon: ChartBarSquareIcon, current: false },
-  { name: 'Settings', href: '#', icon: Cog6ToothIcon, current: false }
+  { name: 'Projects', href: '#', icon: Folder24Regular, current: true },
+  { name: 'Activity', href: '#', icon: Communication24Regular, current: false },
+  { name: 'Billing', href: '#', icon: Receipt24Regular, current: false },
+  { name: 'Templates', href: '#', icon: Diversity24Regular, current: false },
+  { name: 'Settings', href: '#', icon: Settings24Regular, current: false }
 ]
 const teams = [
   { id: 1, name: 'Planetaria', href: '#', initial: 'P', current: false },
