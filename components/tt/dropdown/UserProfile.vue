@@ -5,10 +5,11 @@
     trigger="click"
     :on-select="onSelect"
   >
-    <NButton class="h-14 rounded px-4 py-2 text-sm font-semibold leading-6 text-white border border-red-300 cursor-default">
+    <NSkeleton v-if="!auth" class="h-14" />
+    <NButton v-else :theme-overrides="buttonThemeOverrides" class="h-14 rounded px-4 py-2 text-sm font-semibold leading-6 text-white border border-red-300 cursor-default">
       <div class="flex items-center text-left gap-x-4">
-        <NAvatar class="h-8 w-8 bg-slate-800">
-          {{ auth?.name.substring(0,2).toUpperCase() || 'DV' }}
+        <NAvatar class="h-8 w-8 bg-slate-800" fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg">
+          {{ auth?.name.substring(0, 2).toUpperCase() }}
         </NAvatar>
         <span class="sr-only">Your profile</span>
         <span class="flex min-w-0 flex-1 flex-col">
@@ -21,7 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { DropdownOption } from 'naive-ui'
+import { DropdownOption, ButtonProps } from 'naive-ui'
+
+type ButtonThemeOverrides = NonNullable<ButtonProps['themeOverrides']>
+const buttonThemeOverrides: ButtonThemeOverrides = {
+  border: '' // hides the default border
+}
 
 const { logout } = useAuthClient()
 const auth = useAuth()
