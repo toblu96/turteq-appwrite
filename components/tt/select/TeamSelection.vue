@@ -16,7 +16,6 @@
     size="large"
     @update-value="teamSelectionChanged"
   />
-  {{ selectedTeam }}
 </template>
 
 <script setup lang="ts">
@@ -27,7 +26,7 @@ import {
   SelectRenderLabel
 } from 'naive-ui'
 
-const selectedTeam = ref('')
+const selectedTeam = ref<string | undefined>('')
 
 const { teams, account } = useAppwrite()
 const teamMemberships = await teams.list()
@@ -35,7 +34,11 @@ const userPrefs = await account.getPrefs()
 
 // check if the last selected team was stored
 if (userPrefs.activeTeam) {
-  selectedTeam.value = userPrefs.activeTeam
+  selectedTeam.value = undefined
+  // only add active team if user has still access to the stored team
+  if (teamMemberships.teams.filter(team => team.$id === userPrefs.activeTeam).length === 1) {
+    selectedTeam.value = userPrefs.activeTeam
+  }
 } else {
   selectedTeam.value = teamMemberships.teams[0].$id
   // store current team to users prefs
